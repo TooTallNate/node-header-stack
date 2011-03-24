@@ -39,7 +39,10 @@ Recognized options are:
 ## parser event 'headers' -> function(headers, leftover)
 
 Emitted when the end of the headers has been parsed. _headers_ is a `Headers` instance,
-which is a special Array subclass with other helper functions. _leftover_
+which is a special Array subclass with other helper functions. _leftover_ __may__ be
+a Buffer with any leftover data the Parser received before finishing, it will be the
+beginning of anything after the headers, and should be fed into whatever is parsing
+the Stream next.
 
 
 ## parser event 'error' -> function(err)
