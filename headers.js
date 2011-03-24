@@ -1,3 +1,4 @@
+var inspect = require('util').inspect;
 
 function Headers() {
   var rtn = new Array();
@@ -14,4 +15,17 @@ Headers.prototype._addHeader = function addHeader(line, key, value, index) {
   line.value = value;
   this[index] = line;
   this[key] = this[key.toLowerCase()] = value;
+}
+
+// A custom 'inspect' function for util.inspect to use on these mutant
+// header Arrays. Otherwise they're extremely ugly to `console.log`.
+Headers.prototype.inspect = function headerInspect() {
+  var str = '', len = this.length;
+  this.forEach(function(header, i) {
+    str += (i == 0 ? '[ ' : '  ') +
+           inspect(header.key) + ': ' +
+           inspect(header.value) +
+           (i != len-1 ? ',\n' : ' ]');
+  });
+  return str;
 }
