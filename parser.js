@@ -95,6 +95,10 @@ Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
     if (!this.options.allowFoldedHeaders) {
       return this.emit('error', new Error('ParseError: Encountered a folded header, but `allowFoldedHeaders` is false'));
     }
+    var prevIndex = this.headers.length - 1;
+    var prevHeader = this.headers[prevIndex];
+    line = line.trimLeft();
+    this.headers._addHeader(prevHeader + ' ' + line, prevHeader.key, prevHeader.value + ' ' + line, prevIndex);
   } else {
     // A regular header line, parse like normal
     var firstColon = line.indexOf(':');
@@ -104,10 +108,9 @@ Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
     if (line[firstColon+1] !== ' ' && this.options.strictSpaceAfterColon) {
       return this.emit('error', new Error('ParseError: Encountered a header line without a space after the colon, and `strictSpaceAfterColon` is true'));
     }
-    var index = this.headers.length;
     var key = line.substring(0, firstColon);
     var value = line.substring(firstColon+(line[firstColon+1] == ' ' ? 2 : 1));
-    this.headers._addHeader(line, key, value, index);
+    this.headers._addHeader(line, key, value, this.headers.length);
   }
 }
 
