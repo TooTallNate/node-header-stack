@@ -87,7 +87,10 @@ Parser.prototype._onEnd = function onEnd() {
 Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
   //console.error("Got header line:");
   //console.error(line);
-  if (line.length === 0) {
+  if (!this._firstLineFired && this.options.emitFirstLine) {
+    this._firstLineFired = true;
+    this.emit('firstLine', line);
+  } else if (line.length === 0) {
     // An empty line is the end of the headers
     this._onHeadersComplete();
   } else if (line[0] === ' ' || line[0] === '\t') {
