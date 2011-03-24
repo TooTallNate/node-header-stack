@@ -36,7 +36,7 @@ Recognized options are:
        colon. If _false_ then a space after the colon will be optional.
 
 
-## parser event 'headers' -> function(headers, leftover)
+#### parser event 'headers' -> function(headers, leftover)
 
 Emitted when the end of the headers has been parsed. _headers_ is a `Headers` instance,
 which is a special Array subclass with other helper functions. _leftover_ __may__ be
@@ -45,7 +45,7 @@ beginning of anything after the headers, and should be fed into whatever is pars
 the Stream next.
 
 
-## parser event 'error' -> function(err)
+#### parser event 'error' -> function(err)
 
 Emitted if a malformed header line is encountered. i.e. a header line without a
 valid delimiter. If this is emitted, then a _'headers'_ event will _NOT_ be emitted.
