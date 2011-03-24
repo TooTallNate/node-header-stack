@@ -1,0 +1,22 @@
+{
+  "name": "header-stack",
+  "description": "A `StreamStack` subclass that parses headers until an emtpy line is found.",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TooTallNate/node-header-stack.git"
+  },
+  "author": "Nathan Rajlich <nathan@tootallnate.net> (http://tootallnate.net)",
+  "main": "./index.js",
+  "dependencies": {
+    "stream-stack": ">= 1.1.1",
+    "bufferlist": ">= 0.0.6",
+    "bufferjs": ">= 0.2.3"
+  },
+  "directories": {
+    "lib": "."
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  }
+}
