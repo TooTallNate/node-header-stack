@@ -70,7 +70,7 @@ Parser.prototype._onData = function onData(chunk) {
       this._onData();
     }
   } else {
-    console.error("waiting for the next 'data' event");
+    //console.error("waiting for the next 'data' event");
   }
 }
 
@@ -85,8 +85,8 @@ Parser.prototype._onEnd = function onEnd() {
 // Parses a single line into a key-value header pair, and adds the
 // pair to the 'headers' Array. 'line' is a String.
 Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
-  console.log("Got header line:");
-  console.log(line);
+  //console.error("Got header line:");
+  //console.error(line);
   if (line.length === 0) {
     // An empty line is the end of the headers
     this._onHeadersComplete();
@@ -101,7 +101,6 @@ Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
     if (firstColon < 1) {
       return this.emit('error', new Error('ParseError: Malformed header line, no delimiter (:) found'));
     }
-    console.error(this.options);
     if (line[firstColon+1] !== ' ' && this.options.strictSpaceAfterColon) {
       return this.emit('error', new Error('ParseError: Encountered a header line without a space after the colon, and `strictSpaceAfterColon` is true'));
     }
