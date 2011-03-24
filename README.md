@@ -35,6 +35,11 @@ Recognized options are:
        will be emitted if a header is found without a space after the delimiter
        colon. If _false_ then a space after the colon will be optional.
 
+  - `allowFoldedHeaders` - (Default _false_) - If set to _true_ then folded headers
+       will be allowed. Folded headers are headers lines that start with whitespace,
+       and are intended to be concatenated with the previous header. If _false_, then
+       the parse will throw an error if a folded header is encountered.
+
 
 #### parser event 'headers' -> function(headers, leftover)
 
