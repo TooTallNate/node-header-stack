@@ -108,11 +108,12 @@ Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
     if (firstColon < 1) {
       return this.emit('error', new Error('ParseError: Malformed header line, no delimiter (:) found'));
     }
-    if (line[firstColon+1] !== ' ' && this.options.strictSpaceAfterColon) {
+    var spaceAfterColon = line[firstColon+1] === ' ';
+    if (!spaceAfterColon && this.options.strictSpaceAfterColon) {
       return this.emit('error', new Error('ParseError: Encountered a header line without a space after the colon, and `strictSpaceAfterColon` is true'));
     }
     var key = line.substring(0, firstColon);
-    var value = line.substring(firstColon+(line[firstColon+1] == ' ' ? 2 : 1));
+    var value = line.substring(firstColon + (spaceAfterColon ? 2 : 1));
     this.headers._addHeader(line, key, value, this.headers.length);
   }
 }
