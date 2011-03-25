@@ -2,13 +2,16 @@ var assert = require('assert');
 var Stream = require('stream').Stream;
 var Parser = require('../parser');
 
-var body = new Buffer("test:1\r\n\r\nleftover");
+var body = new Buffer('\r\n');
 var stream = new Stream();
 
-var parser = new Parser(stream);
+var parser = new Parser(stream, {
+  strictCRLF: true
+});
 parser.on('headers', function(headers, leftover) {
-  console.log(headers);
-  console.log(leftover, leftover+'');
+  console.error(headers);
+  assert.equal(headers.length, 0);
+  assert.ok(!leftover);
 });
 
 stream.emit('data', body);
