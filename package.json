@@ -1,7 +1,7 @@
 {
   "name": "header-stack",
   "description": "A `StreamStack` subclass that parses headers until an emtpy line is found.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/TooTallNate/node-header-stack.git"
@@ -18,5 +18,8 @@
   },
   "engines": {
     "node": ">= 0.4.0"
-  }
+  },
+  "files": [
+    ""
+  ]
 }
