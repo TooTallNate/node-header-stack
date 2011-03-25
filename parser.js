@@ -106,7 +106,7 @@ Parser.prototype._parseHeaderLine = function parseHeaderLine(line) {
     // A regular header line, parse like normal
     var firstColon = line.indexOf(':');
     if (firstColon < 1) {
-      return this.emit('error', new Error('ParseError: Malformed header line, no delimiter (:) found'));
+      return this.emit('error', new Error('ParseError: Malformed header line, no delimiter (:) found: "' + line + '"'));
     }
     var spaceAfterColon = line[firstColon+1] === ' ';
     if (!spaceAfterColon && this.options.strictSpaceAfterColon) {
