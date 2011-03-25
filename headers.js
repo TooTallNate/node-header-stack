@@ -20,7 +20,9 @@ Headers.prototype._addHeader = function addHeader(line, key, value, index) {
 // A custom 'inspect' function for util.inspect to use on these mutant
 // header Arrays. Otherwise they're extremely ugly to `console.log`.
 Headers.prototype.inspect = function headerInspect() {
-  var str = '', len = this.length;
+  var len = this.length;
+  if (len == 0) return '[]';
+  var str = '';
   this.forEach(function(header, i) {
     str += (i == 0 ? '[ ' : '  ') +
            inspect(header.key) + ': ' +
