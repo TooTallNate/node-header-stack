@@ -10,20 +10,18 @@ var parser = new Parser(stream, {
 var gotFirstLine = false;
 parser.on('firstLine', function (line) {
   gotFirstLine = true;
-  console.error('First Line:', line);
   assert.equal(line, 'GET / HTTP/1.1');
 });
 var gotHeaders = false;
 parser.on('headers', function (headers, leftover) {
   gotHeaders = true;
-  console.error('Headers:', headers);
   assert.equal(headers.length, 3);
   assert.equal(headers['User-Agent'], 'curl/7.21.0 (i686-pc-linux-gnu) libcurl/7.21.0 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18');
   assert.equal(headers.host, 'localhost:8080');
   assert.equal(headers[2], 'Accept: */*')
   assert.equal(headers[2].key, 'Accept');
   assert.equal(headers[2].value, '*/*')
-  console.error(leftover);
+  assert.ok(!leftover);
 });
 
 process.on('exit', function () {

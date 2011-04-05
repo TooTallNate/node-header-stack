@@ -9,7 +9,6 @@ var parser = new Parser(stream, {
   strictCRLF: true
 });
 parser.on('headers', function(headers, leftover) {
-  console.error(headers);
   assert.equal(headers.length, 0);
   assert.ok(!leftover);
 });
