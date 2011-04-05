@@ -17,11 +17,11 @@ other parsing options available.
 API
 ---
 
-### new Parser(readableStream [, options]) -> parser
+### new Parser([readableStream] [, options]) -> parser
 
-Creates a new `Parser` instance that will parse headers from the given
-_readableStream_. An optional _options_ argument may also be provided.
-Recognized options are:
+Creates a new `Parser` instance that will parse headers. If a _readableStream_ is passed
+in (optional), then 'data' events from it will be used to parse the header. An
+optional _options_ argument may also be provided. Recognized options are:
 
   - `emitFirstLine` - (Default _false_) - If set to _true_, then the first line
        that gets parsed by the Parser won't be treated like a header line, but
@@ -41,6 +41,12 @@ Recognized options are:
        the parse will throw an error if a folded header is encountered.
 
 
+#### parser.parse(b) -> undefined
+
+If no `readableStream` instance was passed into the Parser constructor, then you
+have to option to manually call `parse(buffer)` to do the parsing.
+
+
 #### parser event 'headers' -> function(headers, leftover)
 
 Emitted when the end of the headers has been parsed. _headers_ is a `Headers` instance,
@@ -58,9 +64,26 @@ valid delimiter. If this is emitted, then a _'headers'_ event will _NOT_ be emit
 
 ### new Headers() -> headers
 
-You never need to create a `Headers` instance in user code, but an instance is given
-as the first argument in the _'headers'_ event. It is an Array subclass that has some
-additional helper functions to use the headers easily.
+The `Headers` class is an Array subclass that has some additional helper functions
+to use and mutate the headers easily.
+
+
+#### headers.addHeader(key, value) -> undefined
+
+Adds a new header to the end of the list of headers with the given _key_ and _value_.
+
+
+#### headers.toString([ options ]) -> undefined
+
+The `toString` function of the `Headers` class can be used to turn a headers instance
+back into it's sendable form. The default options are for the most common use cases,
+but you may specify:
+
+  - `delimiter` - (Default _'\r\n'_) - The delimiter that should be used in between
+       each header and to signify the end of the headers.
+
+  - `emptyLastLine` - (Default _true_) - If _true_ then the returned String will contain
+       another "delimiter" at the end, to signify the end of the headers.
 
 
 
