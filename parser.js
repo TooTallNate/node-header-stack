@@ -46,6 +46,13 @@ Parser.DEFAULTS = {
 Parser.LF = new Buffer('\n');
 Parser.CRLF = new Buffer('\r\n');
 
+
+// You may manually call the 'parse' function if no ReadableStream
+// was passed into the constructor.
+Parser.prototype.parse = function parse(b) {
+  return this.stream.emit('data', b);
+}
+
 // Parsing Logic:
 //   - Check if _buffers contains an end-of-line delimiter:
 //      - If yes, slice up to the first end-of-line found:
