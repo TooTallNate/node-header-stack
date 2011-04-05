@@ -16,6 +16,7 @@ var p2 = new Parser({
 });
 assert.ok(p2.stream instanceof Stream);
 assert.notStrictEqual(p1.stream, p2.stream);
+assert.strictEqual(true, p2.options.emitFirstLine);
 
 
 // And including both a Stream instance will use the passed in ReadableStream.
