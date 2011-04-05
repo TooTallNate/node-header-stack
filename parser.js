@@ -1,10 +1,15 @@
 require('bufferjs');
+var Stream = require('stream').Stream;
 var EventEmitter = require('events').EventEmitter;
 var StreamStack = require('stream-stack').StreamStack;
 var BufferList = require('bufferlist');
 var Headers = require('./headers');
 
 function Parser(stream, opts) {
+  if (!(stream instanceof Stream)) {
+    opts = stream;
+    stream = new Stream();
+  }
   opts = opts || {};
   opts.__proto__ = Parser.DEFAULTS;
   this.stream = stream;
