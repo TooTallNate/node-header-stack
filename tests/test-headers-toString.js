@@ -21,6 +21,12 @@ assert.equal(noLastLine.split('\r\n').length, 3);
 assert.equal(noLastLine.indexOf('\r\n\r\n'), -1);
 
 
+var firstLine = h.toString({
+  firstLine: 'test'
+});
+assert.equal(firstLine.indexOf('test'), 0);
+
+
 var delimiter = h.toString({
   delimiter: '~~'
 });

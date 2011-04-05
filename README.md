@@ -79,7 +79,10 @@ The `toString` function of the `Headers` class can be used to turn a headers ins
 back into it's sendable form. The default options are for the most common use cases,
 but you may specify:
 
-  - `delimiter` - (Default _'\r\n'_) - The delimiter that should be used in between
+  - `firstLine` - (Default _false_) - If set to a String instance, then the given string
+       will be used as the first line of the output string (useful for HTTP).
+
+  - `delimiter` - (Default _'\\r\\n'_) - The delimiter that should be used in between
        each header and to signify the end of the headers.
 
   - `emptyLastLine` - (Default _true_) - If _true_ then the returned String will contain

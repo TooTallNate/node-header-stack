@@ -65,6 +65,8 @@ Headers.STRING_DEFAULTS = {
   // For SMTP, if a header is longer than 'maxLineLength', then do "folding"
   // TODO: Implement this in the 'toString' function
   maxLineLength: Infinity,
+  // If set to a String, then it will be used as the first line of the output string.
+  firstLine: false,
   // The delimiter to join the headers with
   delimiter: "\r\n",
   // If 'true', then add an additional 'delimiter' to the end of the String
@@ -76,5 +78,7 @@ Headers.STRING_DEFAULTS = {
 Headers.prototype.toString = function toString(options) {
   options = options || {};
   options.__proto__ = Headers.STRING_DEFAULTS;
-  return this.join(options.delimiter) + options.delimiter + (options.emptyLastLine ? options.delimiter : '');
+  return (options.firstLine ? options.firstLine + options.delimiter : '') + 
+    this.join(options.delimiter) + options.delimiter +
+    (options.emptyLastLine ? options.delimiter : '');
 }
