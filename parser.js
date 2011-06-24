@@ -63,7 +63,10 @@ Parser.prototype.parse = function parse(b) {
 //         - Else parse the line into the headers array. If _buffers.length > 0, call _onData again
 //      - If no, do nothing, wait for next 'data' event
 Parser.prototype._onData = function onData(chunk) {
-  if (chunk) this._buffers.push(chunk);
+  if (chunk) {
+    if (!Buffer.isBuffer(chunk)) chunk = new Buffer(chunk);
+    this._buffers.push(chunk);
+  }
   var buf = this._buffers.take();
   var eol = buf.indexOf(Parser.CRLF);
   var delimLength = Parser.CRLF.length;
