@@ -13,6 +13,11 @@ function Headers(initial) {
           rtn.addHeader(header[0], header[1]);
         } else if (header.key && header.value) {
           rtn.addHeader(header.key, header.value);
+        } else if (typeof header == 'string' && ~header.indexOf(':')) {
+          var firstColon = header.indexOf(':')
+            , valIndex = firstColon + 1
+          if (header[valIndex] === ' ') valIndex++;
+          rtn.addHeader(header.substring(0, firstColon), header.substring(valIndex));
         } else {
           throw new Error("Don't know what to do with this header: '"  + header + "'");
         }
