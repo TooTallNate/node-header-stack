@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/TooTallNate/node-header-stack.png)](http://travis-ci.org/TooTallNate/node-header-stack)
 node-header-stack
 =================
 ### A `StreamStack` subclass that parses headers until an emtpy line is found.
